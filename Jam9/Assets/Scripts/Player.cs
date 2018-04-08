@@ -14,21 +14,39 @@ public class Player : MonoBehaviour {
         heldObject = null;
 	}
 
-	void Update () {
-		// Player input - LATER TO BE MAPPED TO CONTROLLER
+    // Moved input checking to its own function
+    // Player input - LATER TO BE MAPPED TO CONTROLLER
+    // Disable player movement when dialogue is active
+    void CheckInput()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(0, moveSpeed * Time.deltaTime, 0, Space.World);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0, Space.World);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0, Space.World);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(0, -moveSpeed * Time.deltaTime, 0, Space.World);
+        }
+    }
 
-		if (Input.GetKey (KeyCode.W)) {
-			transform.Translate (0, moveSpeed * Time.deltaTime, 0, Space.World);
-		}
-		if (Input.GetKey (KeyCode.A)) {
-			transform.Translate (-moveSpeed * Time.deltaTime, 0, 0, Space.World);
-		}
-		if (Input.GetKey (KeyCode.D)) {
-			transform.Translate (moveSpeed * Time.deltaTime, 0, 0, Space.World);
-		}
-		if (Input.GetKey (KeyCode.S)) {
-			transform.Translate (0, -moveSpeed * Time.deltaTime, 0, Space.World);
-		}
+	void Update () {
+        if (DialogueController.sharedInstance != null)
+        {
+            if (!DialogueController.sharedInstance.dialogueActive)
+                CheckInput();
+        }
+        else
+        {
+            CheckInput();
+        }
 
         //move held object, set y slightly higher so it's above their head
         if(isHoldingObj == true)
