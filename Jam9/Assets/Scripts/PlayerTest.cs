@@ -11,8 +11,11 @@ public class PlayerTest : MonoBehaviour {
 
     void FixedUpdate()
     {
-        float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * 150f;
-        float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * 150f;
-        rb.velocity = new Vector3(x, y);
+        if (!DialogueController.sharedInstance.dialogueActive)
+        {
+            float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * 150f;
+            float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * 150f;
+            rb.velocity = new Vector3(x, y);
+        }
     }
 }
