@@ -10,9 +10,11 @@ public class SpeechBubble : MonoBehaviour {
     //[SerializeField] AnimationCurve moveInCurve;
     //[SerializeField] AnimationCurve moveOutCurve;
     const float horizontalOffset = 0.51f;
+    bool skipDialogue;
 
 	// Use this for initialization
 	void Start () {
+        skipDialogue = false;
 	}
 
     //Set the text mesh's text,
@@ -28,8 +30,28 @@ public class SpeechBubble : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.Space))
+        {
+            skipDialogue = true;
+        }
 	}
+
+    public IEnumerator FillText(string newText)
+    {
+        skipDialogue = false;
+        text.text = "";
+        for (int i = 0; i < newText.Length; i++)
+        {
+            if (skipDialogue)
+            {
+                text.text = newText;
+                break;
+            }
+            text.text += newText[i];
+            yield return new WaitForSeconds(0.02f);
+        }
+        skipDialogue = false;
+    }
 
     public IEnumerator Move(Vector3 npcPosition, float time, string newText, AnimationCurve curve)
     {

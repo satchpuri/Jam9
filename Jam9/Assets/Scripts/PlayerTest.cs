@@ -17,5 +17,9 @@ public class PlayerTest : MonoBehaviour {
             float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * 150f;
             rb.velocity = new Vector3(x, y);
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 }

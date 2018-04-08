@@ -90,8 +90,10 @@ public class DialogueController : MonoBehaviour {
         yield return IShowSpeechIndicator(npcPosition, speechIndicatorExitCurve, hideSpeechIndicatorTime);
         speechBubble.gameObject.SetActive(true);
         yield return speechBubble.Move(npcPosition, showSpeechIndicatorTime, text, speechIndicatorEnterCurve);
-        speechBubble.text.text = text;
+        yield return speechBubble.FillText(text);
+        //speechBubble.text.text = text;
 
+        yield return 0;
         yield return WaitForSkip();
 
         speechBubble.text.text = "";
