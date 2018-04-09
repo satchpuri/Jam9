@@ -50,6 +50,17 @@ public class Player : MonoBehaviour {
 			if (Input.GetKey (KeyCode.S)) {
 				transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
 			}
+            //put down held object
+            if (Input.GetKey(KeyCode.E))
+            {
+                if(isHoldingObj == true)
+                {
+                    //put it down where you are standing
+                    isHoldingObj = false;
+                    heldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    heldObject = null;
+                }
+            }
 		}
     }
 
@@ -81,11 +92,12 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //When adding other objects to pick up, add their tags to the checks as well
-        if (other.gameObject.tag == "Key" && isHoldingObj == false)
+        if ((other.gameObject.tag == "Key" || other.gameObject.tag == "Rock") && isHoldingObj == false)
         {
             isHoldingObj = true;
             heldObject = other.gameObject;
         }
+        
         
     }
 
