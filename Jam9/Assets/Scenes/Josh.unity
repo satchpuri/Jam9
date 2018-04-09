@@ -282,7 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &111498865
 MeshRenderer:
@@ -1110,8 +1110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text:
-  - Line 1\nLine 2
-  - Line 3\nLine 4
+  - Line 1\nLine 2\nLine 3
+  - Line 4\nLine 5\nLine 6
 --- !u!61 &1153711844
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1610,7 +1610,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4735588865232448, guid: a0590bab88fb87d46ab90a243f0d0f87, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0590bab88fb87d46ab90a243f0d0f87, type: 2}

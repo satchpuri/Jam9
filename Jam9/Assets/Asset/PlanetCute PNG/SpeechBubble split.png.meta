@@ -1,12 +1,18 @@
 fileFormatVersion: 2
 guid: 4704dac8a38c5ee4b862382b6ec55474
-timeCreated: 1523216118
+timeCreated: 1523315179
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: begin
-    21300002: end
-    21300004: center
+    21300000: topleft
+    21300002: topright
+    21300004: topcenter
+    21300006: centerleft
+    21300008: centerright
+    21300010: centercenter
+    21300012: bottomleft
+    21300014: bottomright
+    21300016: bottomcenter
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -68,7 +74,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -78,7 +83,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -88,7 +92,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -98,7 +101,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   - buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -108,48 +110,131 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: begin
+      name: topleft
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85
+        width: 29
+        height: 24
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: topright
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 85
+        width: 21
+        height: 24
+      alignment: 9
+      pivot: {x: -2.42, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: topcenter
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 85
+        width: 51
+        height: 24
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: centerleft
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 26
+        width: 29
+        height: 59
+      alignment: 3
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: centerright
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 26
+        width: 21
+        height: 59
+      alignment: 9
+      pivot: {x: -2.42, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: centercenter
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 26
+        width: 51
+        height: 59
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: bottomleft
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 29
-        height: 109
-      alignment: 5
-      pivot: {x: 1, y: 0.5}
+        height: 26
+      alignment: 9
+      pivot: {x: 1, y: 3.26}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: end
+      name: bottomright
       rect:
         serializedVersion: 2
         x: 80
         y: 0
         width: 21
-        height: 109
+        height: 26
       alignment: 9
-      pivot: {x: -2.4, y: 0.5}
+      pivot: {x: -2.42, y: 3.26}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: center
+      name: bottomcenter
       rect:
         serializedVersion: 2
         x: 29
         y: 0
         width: 51
-        height: 109
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        height: 26
+      alignment: 9
+      pivot: {x: 0, y: 3.26}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
