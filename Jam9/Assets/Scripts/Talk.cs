@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Talk : MonoBehaviour {
-    public string text;
+    public string[] text;
     bool playerNear;
 
 	void Start () {

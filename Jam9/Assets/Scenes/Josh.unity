@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -1110,7 +1109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f00b0d7c10e5b46a62c13dc3225f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Line 1\nLine 2
+  text:
+  - Line 1\nLine 2
+  - Line 3\nLine 4
 --- !u!61 &1153711844
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1379,7 +1380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f00b0d7c10e5b46a62c13dc3225f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Hello, world!\nI hope this is acceptable for speech bubbles.
+  text:
+  - I am an NPC
+  - These are the things\nthat I say.
+  - I hope you're having fun\nwith this game.
+  - Please...
+  - Pleeeeeeeease.......
 --- !u!61 &1369323526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1550,7 +1556,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
