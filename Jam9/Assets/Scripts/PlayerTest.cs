@@ -9,11 +9,35 @@ public class PlayerTest : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
 	}
 
+    float GetX()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            return -1;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            return 1;
+        }
+        return 0;
+    }
+
+    float GetY()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            return -1;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            return 1;
+        }
+        return 0;
+    }
     void CheckInput()
     {
-        float x = Input.GetAxisRaw("RHorizontal") * Time.deltaTime * 150f;
-        float y = Input.GetAxisRaw("RVertical") * Time.deltaTime * 150f;
-        Debug.Log(y);
+        float x = GetX() * Time.deltaTime * 150f;//Input.GetAxisRaw("RHorizontal") * Time.deltaTime * 150f;
+        float y = GetY() * Time.deltaTime * 150f;//Input.GetAxisRaw("RVertical") * Time.deltaTime * 150f;
         rb.velocity = new Vector3(x, y);
     }
 
