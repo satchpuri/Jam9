@@ -3,45 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Player class: goes on top most parent of Player object, handles all player input
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
-	int HP = 3;
-	float moveSpeed = 3f;
+	[SerializeField]
+	private int HP = 3;
+
+	Rigidbody2D rb;
+	[SerializeField]
+	private float moveSpeed = 150f;
+
     private bool isHoldingObj;
     private GameObject heldObject;
 
+	private GameObject aimIndicator;
+	private Vector3 aimDirection;
+	public GameObject bulletPrefab;
+
+	private bool keyboard_Debug = true;
+
 	void Start () {
+		rb = GetComponent<Rigidbody2D>();
         isHoldingObj = false;
         heldObject = null;
+
+		aimIndicator = this.gameObject.transform.GetChild (1).gameObject;	// DirectionIndicator GameObject should be 1
 	}
 
-    // Moved input checking to its own function
-    // Player input - LATER TO BE MAPPED TO CONTROLLER
-    // Disable player movement when dialogue is active
+    // Player input check
     void CheckInput()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(0, moveSpeed * Time.deltaTime, 0, Space.World);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0, Space.World);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(moveSpeed * Time.deltaTime, 0, 0, Space.World);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(0, -moveSpeed * Time.deltaTime, 0, Space.World);
-        }
+		float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
+		float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * moveSpeed;
+		rb.velocity = new Vector3(x, y);
+
+		// For Keyboard
+		if (keyboard_Debug) {
+			if (Input.GetKey (KeyCode.W)) {
+				transform.Translate (0, 3f * Time.deltaTime, 0, Space.World);
+			}
+			if (Input.GetKey (KeyCode.A)) {
+				transform.Translate (-3f * Time.deltaTime, 0, 0, Space.World);
+			}
+			if (Input.GetKey (KeyCode.D)) {
+				transform.Translate (3f * Time.deltaTime, 0, 0, Space.World);
+			}
+			if (Input.GetKey (KeyCode.S)) {
+				transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
+			}
+		}
     }
 
 	void Update () {
         if (DialogueController.sharedInstance != null)
         {
+			// Disable player movement when dialogue is active
             if (!DialogueController.sharedInstance.dialogueActive)
                 CheckInput();
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("R2") == 1f)
+				FireAttack();
         }
         else
         {
@@ -53,6 +72,9 @@ public class Player : MonoBehaviour {
         {
             heldObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
         }
+
+		// Get direction of aim indicator
+
 	}
 
     //pickup object
@@ -78,6 +100,18 @@ public class Player : MonoBehaviour {
             other.collider.GetComponent<Door>().OpenDoor();
         }
     }
+
+	void FireAttack() {
+		// rotation shuld be towards indicator
+		// get current aimDirection, which is the localPosition of the indicator since it is in proximity to the center of the player object
+		aimDirection = aimIndicator.transform.localPosition;
+
+		// Do not fire if at 0 position*****
+		//if (aimDirection != Vector3.zero)
+			Instantiate (bulletPrefab, transform.localPosition, Quaternion.LookRotation(aimDirection));
+
+
+	}
 
 
 }
