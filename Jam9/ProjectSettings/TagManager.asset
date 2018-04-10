@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Key
-  - Door
-  - Pickup
+  - Rock
+  - Gem
   layers:
   - Default
   - TransparentFX

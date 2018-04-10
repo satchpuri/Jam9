@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Player class: goes on top most parent of Player object, handles all player input
+// Player Prefab:
+//	Player
+//		Sprite
+//		DirectionIndicator
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
+	public int playerNumber = 0;
+	[HideInInspector]
+	public bool isDead = false;		// use for UI/gamestate calls
+
 	[SerializeField]
 	private int HP = 3;
 
@@ -26,6 +34,7 @@ public class Player : MonoBehaviour {
         isHoldingObj = false;
         heldObject = null;
 
+		// gets the child object AimIndicator
 		aimIndicator = this.gameObject.transform.GetChild (1).gameObject;	// DirectionIndicator GameObject should be 1
 	}
 
@@ -37,6 +46,7 @@ public class Player : MonoBehaviour {
 		rb.velocity = new Vector3(x, y);
 
 		// For Keyboard
+		// NOTE: In order for camera movement to work, needs to be moving with the Controller (using rigidbody, not Translate())
 		if (keyboard_Debug) {
 			if (Input.GetKey (KeyCode.W)) {
 				transform.Translate (0, 3f * Time.deltaTime, 0, Space.World);
@@ -50,6 +60,17 @@ public class Player : MonoBehaviour {
 			if (Input.GetKey (KeyCode.S)) {
 				transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
 			}
+            //put down held object
+            if (Input.GetKey(KeyCode.E))
+            {
+                if(isHoldingObj == true)
+                {
+                    //put it down where you are standing
+                    isHoldingObj = false;
+                    heldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    heldObject = null;
+                }
+            }
 		}
     }
 
@@ -59,7 +80,8 @@ public class Player : MonoBehaviour {
 			// Disable player movement when dialogue is active
             if (!DialogueController.sharedInstance.dialogueActive)
                 CheckInput();
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetAxis("R2") == 1f)
+			// Input for firing
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("R2"))
 				FireAttack();
         }
         else
@@ -73,7 +95,13 @@ public class Player : MonoBehaviour {
             heldObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
         }
 
-		// Get direction of aim indicator
+		// When HP goes down to 0
+		if (HP <= 0) {
+			isDead = true;
+			Die ();
+			Debug.Log ("P" + playerNumber + " has died.");
+		}
+		
 
 	}
 
@@ -81,11 +109,12 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //When adding other objects to pick up, add their tags to the checks as well
-        if (other.gameObject.tag == "Key" && isHoldingObj == false)
+        if ((other.gameObject.tag == "Key" || other.gameObject.tag == "Rock") && isHoldingObj == false)
         {
             isHoldingObj = true;
             heldObject = other.gameObject;
         }
+        
         
     }
 
@@ -99,18 +128,29 @@ public class Player : MonoBehaviour {
             heldObject = null;
             other.collider.GetComponent<Door>().OpenDoor();
         }
+
+		//  Enemy Collision
+		if (other.gameObject.tag == "Enemy") {
+			HP--;
+			Debug.Log ("P" + playerNumber + " HP = " + HP);
+		}
     }
 
 	void FireAttack() {
 		// rotation shuld be towards indicator
 		// get current aimDirection, which is the localPosition of the indicator since it is in proximity to the center of the player object
 		aimDirection = aimIndicator.transform.localPosition;
+		//Debug.Log (aimDirection.magnitude);
 
-		// Do not fire if at 0 position*****
-		//if (aimDirection != Vector3.zero)
+		// Do not allow fire if indicator at or close to 0 position
+		// .58 is about the greatest value of  magnitude  of the indicator from the center, so stick must be pretty much fully extended to be able to fire
+		if (aimDirection.magnitude >= 0.58f)
 			Instantiate (bulletPrefab, transform.localPosition, Quaternion.LookRotation(aimDirection));
+	}
 
-
+	// death sequence
+	void Die(){
+		Destroy (gameObject);
 	}
 
 

@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour {
 		
 	void Update () {
 		// Always move in the foward direction
-		transform.Translate (speed * Vector3.forward * Time.deltaTime);
+		transform.Translate (speed * Vector3.forward * Time.deltaTime);	// d efault only one speed? not s low o r fast 
 		transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
 
 		// "lock" Y-rotation of sprite child
