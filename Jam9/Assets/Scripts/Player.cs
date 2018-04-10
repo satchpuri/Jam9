@@ -47,43 +47,77 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+    void SetObjectToHeld(GameObject obj, bool beingHeld)
+    {
+        obj.GetComponent<BeingHeld>().beingHeld = beingHeld;
+    }
+
+    bool IsBeingHeld(GameObject obj)
+    {
+        return obj.GetComponent<BeingHeld>().beingHeld;
+    }
+
+    bool PutDownButtonPressed()
+    {
+        if (playerNumber == 0)
+        {
+            return Input.GetButtonDown("PutDownObject1");
+        }
+        else if (playerNumber == 1)
+        {
+            return Input.GetButtonDown("PutDownObject2");
+        }
+        return false;
+    }
+
     // Player input check
     void CheckInput()
     {
-		float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
-		float y = Input.GetAxisRaw("Vertical") * Time.deltaTime * moveSpeed;
+        float x = 0f;
+        float y = 0f;
+        if (playerNumber == 0)
+        {
+            x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
+            y = Input.GetAxisRaw("Vertical") * Time.deltaTime * moveSpeed;
+        }
+        else if (playerNumber == 1)
+        {
+            x = Input.GetAxisRaw("Horizontal2") * Time.deltaTime * moveSpeed;
+            y = Input.GetAxisRaw("Vertical2") * Time.deltaTime * moveSpeed;
+        }
 		rb.velocity = new Vector3(x, y);
 
 		// For Keyboard
 		// NOTE: In order for camera movement to work, needs to be moving with the Controller (using rigidbody, not Translate())
 		if (keyboard_Debug) {
 			if (Input.GetKey (KeyCode.W)) {
-                rb.velocity = Vector3.up * Time.deltaTime * 45f;
+                rb.velocity = Vector3.up * Time.deltaTime * 150f;
 				//transform.Translate (0, 3f * Time.deltaTime, 0, Space.World);
 			}
 			if (Input.GetKey (KeyCode.A))
             {
-                rb.velocity = Vector3.left * Time.deltaTime * 45f;
+                rb.velocity = Vector3.left * Time.deltaTime * 150f;
                 //transform.Translate (-3f * Time.deltaTime, 0, 0, Space.World);
             }
 			if (Input.GetKey (KeyCode.D))
             {
-                rb.velocity = Vector3.right * Time.deltaTime * 45f;
+                rb.velocity = Vector3.right * Time.deltaTime * 150f;
                 //transform.Translate (3f * Time.deltaTime, 0, 0, Space.World);
             }
 			if (Input.GetKey (KeyCode.S))
             {
-                rb.velocity = Vector3.down * Time.deltaTime * 45f;
+                rb.velocity = Vector3.down * Time.deltaTime * 150f;
                 //transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
             }
             //put down held object
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) || PutDownButtonPressed())
             {
                 if(isHoldingObj == true)
                 {
                     //put it down where you are standing
                     isHoldingObj = false;
                     heldObject.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    SetObjectToHeld(heldObject, false);
                     heldObject = null;
                 }
             }
@@ -91,6 +125,10 @@ public class Player : MonoBehaviour {
     }
 
 	void Update () {
+        if (PutDownButtonPressed())
+        {
+            Debug.Log(gameObject.name);
+        }
         if (DialogueController.sharedInstance != null)
         {
 			// Disable player movement when dialogue is active
@@ -125,10 +163,11 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //When adding other objects to pick up, add their tags to the checks as well
-        if ((other.gameObject.tag == "Key" || other.gameObject.tag == "Rock") && isHoldingObj == false)
+        if ((other.gameObject.tag == "Key" || other.gameObject.tag == "Rock") && isHoldingObj == false && !IsBeingHeld(other.gameObject))
         {
             isHoldingObj = true;
             heldObject = other.gameObject;
+            SetObjectToHeld(other.gameObject, true);
         }
         
         

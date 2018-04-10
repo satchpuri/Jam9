@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour {
 
+    public bool stayOpen = false;
 	public bool activated;
 	public Door gemDoor;
 	private Transform childSpr;
 	private int activeTriggers;
+
+    public bool triggeredByPlayer = true;
+    public bool triggeredByRock = true;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +28,7 @@ public class Gem : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		//if a player steps on the button, or a rock is placed on the button
-		if (other.gameObject.tag == "Player" || other.gameObject.tag == "Rock")
+		if ((other.gameObject.tag == "Player" && triggeredByPlayer) || (other.gameObject.tag == "Rock" && triggeredByRock))
 		{
 			activeTriggers++;
 			CheckActiveTriggers ();
@@ -33,8 +37,10 @@ public class Gem : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other)
 	{
+        if (stayOpen)
+            return;
 		//if a player steps off the button, or a rock is taken off the button
-		if (other.gameObject.tag == "Player" || other.gameObject.tag == "Rock")
+		if ((other.gameObject.tag == "Player" && triggeredByPlayer) || (other.gameObject.tag == "Rock" && triggeredByRock))
 		{
 			activeTriggers--;
 			CheckActiveTriggers ();
