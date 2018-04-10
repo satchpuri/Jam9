@@ -13,6 +13,8 @@ TagManager:
   - Enemy
   - Door
   - Key
+  - Bug
+  - RockSpawningArea
   layers:
   - Default
   - TransparentFX

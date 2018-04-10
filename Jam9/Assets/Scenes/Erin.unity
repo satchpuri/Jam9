@@ -370,6 +370,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd738d9effca6ab4a8b96b99aeeb3199, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1460279492
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586965401090820, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 70ad4860afa464647bc545fb22651479, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1936899961
 Prefab:
   m_ObjectHideFlags: 0
@@ -409,6 +451,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114417595597336320, guid: aef80a0448e3f1f44a5faaa838f7ac3a,
+        type: 2}
+      propertyPath: spawnRock
+      value: 
+      objectReference: {fileID: 1846309975892238, guid: 91700ae627c79ed43bf56404754ce714,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aef80a0448e3f1f44a5faaa838f7ac3a, type: 2}
   m_IsPrefabParent: 0
