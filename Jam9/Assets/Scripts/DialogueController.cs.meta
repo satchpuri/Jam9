@@ -1,11 +1,15 @@
 fileFormatVersion: 2
 guid: befa395768491744bae29d78238c2cf2
-timeCreated: 1523214370
+timeCreated: 1523316947
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - speechIndicatorPrefab: {fileID: 1041037072715918, guid: 1897e7e76eb9fee43b7addab41205bf2,
+      type: 2}
+  - speechBubblePrefab: {fileID: 1155999129285586, guid: 1377804a54d41a145a605adae98709e6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
