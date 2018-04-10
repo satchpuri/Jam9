@@ -29,6 +29,9 @@ public class Player : MonoBehaviour {
 
 	private bool keyboard_Debug = true;
 
+    //for spawning rocks in the rock pile, should really be moved to a different script but I'm throwing it here quick
+    public GameObject spawnRock;
+
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
         isHoldingObj = false;
@@ -168,6 +171,15 @@ public class Player : MonoBehaviour {
             isHoldingObj = true;
             heldObject = other.gameObject;
             SetObjectToHeld(other.gameObject, true);
+        }
+        if(other.gameObject.tag == "RockSpawningArea" && isHoldingObj == false)
+        {
+            GameObject spawnedRock;
+            spawnedRock = Instantiate(spawnRock);
+
+            isHoldingObj = true;
+            heldObject = spawnedRock;
+            SetObjectToHeld(spawnedRock, true);
         }
         
         
