@@ -69,7 +69,7 @@ public class DialogueController : MonoBehaviour {
         StartRoutine(IShowSpeechIndicator(npcPosition, speechIndicatorExitCurve, hideSpeechIndicatorTime));
     }
 
-    public void ShowDialogue(string text, Vector3 npcPosition)
+    public void ShowDialogue(string[] text, Vector3 npcPosition)
     {
         StartRoutine(IShowDialogue(text, npcPosition));
     }
@@ -82,25 +82,28 @@ public class DialogueController : MonoBehaviour {
         }
     }
 
-    IEnumerator IShowDialogue(string text, Vector3 npcPosition)
+    IEnumerator IShowDialogue(string[] text, Vector3 npcPosition)
     {
         dialogueActive = true;
 
-        text = text.Replace("\\n", "\n");
         yield return IShowSpeechIndicator(npcPosition, speechIndicatorExitCurve, hideSpeechIndicatorTime);
-        speechBubble.gameObject.SetActive(true);
-        yield return speechBubble.Move(npcPosition, showSpeechIndicatorTime, text, speechIndicatorEnterCurve);
-        yield return speechBubble.FillText(text);
-        //speechBubble.text.text = text;
+        foreach (string str_ in text)
+        {
+            string str = str_.Replace("\\n", "\n");
+            speechBubble.gameObject.SetActive(true);
+            yield return speechBubble.Move(npcPosition, showSpeechIndicatorTime, str, speechIndicatorEnterCurve);
+            yield return speechBubble.FillText(str);
+            //speechBubble.text.text = text;
 
-        yield return 0;
-        yield return WaitForSkip();
+            yield return 0;
+            yield return WaitForSkip();
 
-        speechBubble.text.text = "";
-        yield return speechBubble.Move(npcPosition, hideSpeechIndicatorTime, text, speechIndicatorExitCurve);
+            speechBubble.text.text = "";
+            yield return speechBubble.Move(npcPosition, hideSpeechIndicatorTime, str, speechIndicatorExitCurve);
 
+
+        }
         dialogueActive = false;
-
         yield return IShowSpeechIndicator(npcPosition, speechIndicatorEnterCurve, showSpeechIndicatorTime);
     }
 	
