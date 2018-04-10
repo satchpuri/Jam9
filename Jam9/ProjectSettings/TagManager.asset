@@ -7,6 +7,11 @@ TagManager:
   - Key
   - Door
   - Pickup
+  - Attackable
+  - Shadow
+  - Ground
+  - PlayerBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
