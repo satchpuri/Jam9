@@ -48,7 +48,9 @@ public class DialogueController : MonoBehaviour {
 
     IEnumerator IShowSpeechIndicator(Vector3 npcPosition, AnimationCurve curve, float time)
     {
-        speechIndicator.transform.position = npcPosition + new Vector3(0.3f, 0.2f);
+        Vector3 newPos = npcPosition + new Vector3(0.3f, 0.2f);
+        newPos.z = -5f;
+        speechIndicator.transform.position = newPos;
         speechIndicator.SetActive(true);
 
         for (float i = 0f; i < time; i += Time.deltaTime)
@@ -76,7 +78,7 @@ public class DialogueController : MonoBehaviour {
 
     IEnumerator WaitForSkip()
     {
-        while (!Input.GetKeyDown(DialogueButton))
+        while (!Input.GetKeyDown(DialogueButton) || Time.timeScale == 0f)
         {
             yield return 0;
         }
@@ -86,6 +88,7 @@ public class DialogueController : MonoBehaviour {
     {
         dialogueActive = true;
 
+        npcPosition.z = -5f;
         yield return IShowSpeechIndicator(npcPosition, speechIndicatorExitCurve, hideSpeechIndicatorTime);
         foreach (string str_ in text)
         {
@@ -100,8 +103,6 @@ public class DialogueController : MonoBehaviour {
 
             speechBubble.text.text = "";
             yield return speechBubble.Move(npcPosition, hideSpeechIndicatorTime, str, speechIndicatorExitCurve);
-
-
         }
         dialogueActive = false;
         yield return IShowSpeechIndicator(npcPosition, speechIndicatorEnterCurve, showSpeechIndicatorTime);

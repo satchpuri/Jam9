@@ -12,7 +12,7 @@ public class Talk : MonoBehaviour {
 	
 
 	void Update () {
-		if (Input.GetKeyDown(DialogueController.DialogueButton) && playerNear && !DialogueController.sharedInstance.dialogueActive)
+		if (Input.GetKeyDown(DialogueController.DialogueButton) && playerNear && !DialogueController.sharedInstance.dialogueActive && Time.timeScale != 0f)
         {
             DialogueController.sharedInstance.ShowDialogue(text, transform.position);
         }
