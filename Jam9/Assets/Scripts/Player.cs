@@ -9,7 +9,7 @@ using UnityEngine;
 //		DirectionIndicator
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
-	public int playerNumber = 0;
+	public int playerNumber;
 	[HideInInspector]
 	public bool isDead = false;		// use for UI/gamestate calls
 
@@ -36,6 +36,15 @@ public class Player : MonoBehaviour {
 
 		// gets the child object AimIndicator
 		aimIndicator = this.gameObject.transform.GetChild (1).gameObject;	// DirectionIndicator GameObject should be 1
+
+
+		// Assign Player Input for controllers
+		if (playerNumber == 0) {
+			
+		}
+		if (playerNumber == 1) {
+			
+		}
 	}
 
     // Player input check
