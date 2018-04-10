@@ -28,10 +28,10 @@ public class CameraSceneTransitioner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.T))
-        {
-            Transition(1);
-        }
+		//if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Transition(1);
+        //}
 	}
 
     public void Transition(int levelNumber)
