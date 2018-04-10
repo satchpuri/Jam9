@@ -168,6 +168,8 @@ public class Player : MonoBehaviour {
             isHoldingObj = true;
             heldObject = other.gameObject;
             SetObjectToHeld(other.gameObject, true);
+
+            FindObjectOfType<AudioManager>().Play("Pickup");
         }
         
         
