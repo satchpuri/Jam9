@@ -58,17 +58,24 @@ public class Player : MonoBehaviour {
 		// NOTE: In order for camera movement to work, needs to be moving with the Controller (using rigidbody, not Translate())
 		if (keyboard_Debug) {
 			if (Input.GetKey (KeyCode.W)) {
-				transform.Translate (0, 3f * Time.deltaTime, 0, Space.World);
+                rb.velocity = Vector3.up * Time.deltaTime * 45f;
+				//transform.Translate (0, 3f * Time.deltaTime, 0, Space.World);
 			}
-			if (Input.GetKey (KeyCode.A)) {
-				transform.Translate (-3f * Time.deltaTime, 0, 0, Space.World);
-			}
-			if (Input.GetKey (KeyCode.D)) {
-				transform.Translate (3f * Time.deltaTime, 0, 0, Space.World);
-			}
-			if (Input.GetKey (KeyCode.S)) {
-				transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
-			}
+			if (Input.GetKey (KeyCode.A))
+            {
+                rb.velocity = Vector3.left * Time.deltaTime * 45f;
+                //transform.Translate (-3f * Time.deltaTime, 0, 0, Space.World);
+            }
+			if (Input.GetKey (KeyCode.D))
+            {
+                rb.velocity = Vector3.right * Time.deltaTime * 45f;
+                //transform.Translate (3f * Time.deltaTime, 0, 0, Space.World);
+            }
+			if (Input.GetKey (KeyCode.S))
+            {
+                rb.velocity = Vector3.down * Time.deltaTime * 45f;
+                //transform.Translate (0, -3f * Time.deltaTime, 0, Space.World);
+            }
             //put down held object
             if (Input.GetKey(KeyCode.E))
             {
