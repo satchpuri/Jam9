@@ -26,4 +26,10 @@ public class Door : MonoBehaviour {
         spriteR.sprite = openSprite;
         collider.enabled = false;
     }
+
+    public void CloseDoor()
+    {
+        spriteR.sprite = closedSprite;
+        collider.enabled = true;
+    }
 }

@@ -7,6 +7,19 @@ TagManager:
   - Key
   - Door
   - Pickup
+<<<<<<< HEAD
+  - Attackable
+  - Shadow
+  - Ground
+  - PlayerBullet
+  - Enemy
+=======
+  - Ground
+  - Attackable
+  - Shadow
+  - Gem
+  - Rock
+>>>>>>> bcef2073b806a678e21b728cbdda13ba9c28cf75
   layers:
   - Default
   - TransparentFX
@@ -41,6 +54,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Gems
+    uniqueID: 397851049
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 47835973
     locked: 0
