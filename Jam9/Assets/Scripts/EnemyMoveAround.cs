@@ -76,19 +76,6 @@ public class EnemyMoveAround : MonoBehaviour
 		isWalking = true;
 		walkCounter = walkTime;
 	}
-
-	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player" ||
-			other.gameObject.tag == "PlayerBullet" 
-		)
-			Die ();
-	}
-
-	// sequence of things that happen upon death
-	private void Die(){
-		Destroy (gameObject);
-	}
-
 }
 
 
